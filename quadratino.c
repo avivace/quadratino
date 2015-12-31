@@ -98,16 +98,22 @@ int main(){
   move_sprite(18,120,levelbar_y);
 
   while(start){
+    wait_vbl_done();
+    wait_vbl_done();
+    wait_vbl_done();
+    stopSFX();
     counter = joypad();   // Update Input
     updateDiffBar();      // Update Diff Bar and Mode Select
     set_sprite_tile(18,4+modeselect);
 
     if (counter & J_A && (up==0)) {
+      playSFX(1);
       difficulty++;
       up=1;
     }
 
     if (counter & J_B && (up==0)) {
+      playSFX(1);
       modeselect++;
       up=1;
     }
@@ -181,9 +187,8 @@ int main(){
 
 while(1){
  updateInputBuffer();
- frame++;
  wait_vbl_done();
- if (frame>(framej)) { .   //  main gameflow
+ if (frame==framej || framej==0) {   //  main gameflow
     frame=1;
     if (head_x%8==0 && head_y%8==0) {     // apply change direction when aligned in grid
       if(((last==1 || last==2) && (lastb==3 || lastb==4)) || ((last==3 || last==4) && (lastb==1 || lastb==2))) {
@@ -251,6 +256,7 @@ while(1){
         printScore(score); // Print Score [!]
       }
     }
+    frame++;
 }
   
 }
@@ -316,6 +322,7 @@ void moveHead(){
   if(last==3) head_x-=movrate;
   if(last==4) head_x+=movrate;
   //move_sprite(0,head_x,head_y);
+  stopSFX();
 }
 
 void printScore(UINT16 score){
