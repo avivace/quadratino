@@ -10,11 +10,12 @@
 
 */
 
-#include <gb/gb.h>
-#include <gb/hardware.h>
-#include <rand.h>
-#include "res.c"
+#include <gb/gb.h> // GBDK function library
+#include <gb/hardware.h> // Handy hardware references
+#include <rand.h> // Random functions
+#include "res.c" // Sprite and background data
 
+// Function declaration
 void drawFrame();
 void fadeOutBkg(UINT8);
 void fadeInBkg(UINT8);
@@ -43,13 +44,13 @@ UINT8 randomize(UINT8,UINT8);
 #define sbonusValue 5
 #define sbaseValue 1
 
-// ## VARIABLES ##
+// Variables
 UBYTE start,up,levelbar_x,levelbar_y,k,n,justStarted,soundStart,s,bonus_score,food_score,life,justBonused,bonus_x,bonus_y,foodRedraw,counter,head_x,head_y,food_x,food_y,last,lastb,respawnFood,food_xr,food_yr,valid, initialFoodSpawn, initialHeadSpawn,buffer[20],tail[100][3],i,p,sp;
 UINT16 digit[3],x,y,score,pos,j,frame,estimate,difficulty,framej,snake[150],bar[8];
 UINT8 modeselect;
 UWORD seed;
 
-// ## DO THINGS ##
+// Do things
 int main(){
   difficulty=3;
   modeselect=0;
@@ -192,9 +193,10 @@ while(1){
     frame=1;
     if (head_x%8==0 && head_y%8==0) {     // apply change direction when aligned in grid
       if(((last==1 || last==2) && (lastb==3 || lastb==4)) || ((last==3 || last==4) && (lastb==1 || lastb==2))) {
-        last=lastb;                         // AND only when rota is okay with it (1,2>3,4 3,4>1,2)
+        last=lastb;
           }
     }
+
     x=(head_x-8)/8;
     y=(head_y-16)/8;
 
@@ -241,7 +243,7 @@ while(1){
       score = sbaseValue*(food_score*sfoodValue+bonus_score*sbonusValue); // Update total score [!]
       printScore(score); // Print Score [!]
     }
-    //printScore(frame); //TEMP TEST
+
     // Stop any playing sound
     if ((frame%soundStart)==3) stopSFX(); //[!!]
 
@@ -262,8 +264,7 @@ while(1){
 }
 
 
-//FUNCTIONS!
-
+// FUNCTIONS
 void updateDiffBar(){
   for(i=0;i<8;i++){
     bar[i]=0;
@@ -465,8 +466,6 @@ UINT16 mapCoordinate(UINT8 x, UINT8 y){
   n = (y*32)+x;
   return n;
 }
-
-
 
 /*
 
