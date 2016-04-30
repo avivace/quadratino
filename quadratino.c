@@ -393,7 +393,7 @@ void spawnFood(){
 }
 
 UINT8 randomize(UINT8 range1,UINT8 range2){     // Generate a valid random n so range1=<n=<range2 
-  UINT8 n;                                      // I don't really get why we need to do this
+  UINT8 n;                                      
   valid=0;
   while(valid==0){
     n=range1+rand()%range2;
